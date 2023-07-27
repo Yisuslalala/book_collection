@@ -46,30 +46,34 @@ app.post("/books", (req, res) => {
 });
 
 app.delete("/books/:id", (req, res) => {
-    const bookId = req.params.id;
+    const bookId = req.params.book_id;
+    // console.log(bookId);
     const q = "DELETE FROM books WHERE book_id = ?";
     db.query(q, [bookId], (err, result) => {
         if (err) {
             console.log(err);
         } else {
-            return res.json("Book has been deleted");
+            res.send("Book has been deleted");
         }
     });
 });
 
-/*
-app.delete("/delete_book/:book_id", (res, req) => {
-    const id = req.params.id;
-    q = "DELETE FROM books WHERE book_id = ?";
-    db.query(q, id, (err, result) => {
+app.put("/books/:id", (req, res) => {
+    const bookId = req.params.book_id;
+    const q = "UPDATE books SET title = ?, description = ?, price = ?, cover = ? WHERE book_id = ?";
+    const title = req.body.title;
+    const description = req.body.description;
+    const cover = req.body.cover;
+    const price = req.body.price;
+    
+    db.query(q, [title, description, cover, price, bookId], (err, result) => {
         if (err) {
             console.log(err);
         } else {
-            return res.json(result);
+            res.send("Book updated successfully");
         }
     });
 });
-*/
 
 app.listen(8000, () => {
     console.log("Connected to backend in port 8000")

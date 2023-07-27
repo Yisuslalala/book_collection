@@ -54,7 +54,7 @@ const Add = () => {
                 onChange={handleChange} 
                 name='price'
             />
-            <button onClick={handleClick}>Add Book</button>
+            <button className='formButton' onClick={handleClick}>Add Book</button>
         </div>
     );
 };
