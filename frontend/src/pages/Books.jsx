@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from "axios";
 import {Link} from "react-router-dom";
+import "../styles/Books.css";
+
 
 const Books = () => {
     const [books, setBooks] = useState([]);
@@ -40,16 +42,18 @@ const Books = () => {
                 {books.map((book) => (
                     <div className="book" key={book.book_id}>
                         {book.cover && <img src={book.cover} alt="" />}
-                        <h2>{book.title}</h2>
-                        <p>{book.description}</p>
-                        <span>${book.price}</span>
+                        <div className='information'>
+                            <h2>{book.title}</h2>
+                            <p>{book.description}</p>
+                            <span>${book.price}</span>
+                        </div>
                         <button className='delete' onClick={ () => handleDelete(book.book_id) }>Delete</button>
                         <button className="update"><Link to={`/update/${book.book_id}`}>Update</Link></button>
                     </div>
                 ))}
             </div>
             <div>
-                <button><Link to="/add">Add new book</Link></button>
+                <button className='newBtn'><Link to="/add">Add book</Link></button>
             </div>
         </div>
     )
